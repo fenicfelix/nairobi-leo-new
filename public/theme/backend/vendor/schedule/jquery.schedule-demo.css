@@ -1,0 +1,33 @@
+.jqs-period-time {
+  display: none;
+}
+
+.jqs-options-duplicate,
+.jqs-options-remove {
+  border-radius: 5px;
+}
+
+.jqs-options-remove {
+  background: #ef4444;
+  color: #fff;
+}
+
+.jqs-options-remove:hover {
+  background: #d82e2e;
+  color: #fff;
+}
+
+.jqs-options-duplicate {
+  background: #d82e2e;
+  color: #fff;
+}
+
+.jqs-options-duplicate {
+  background: #386daf;
+  color: #fff;
+}
+
+.jqs-options-duplicate:hover {
+  background: #275185;
+  color: #fff;
+}

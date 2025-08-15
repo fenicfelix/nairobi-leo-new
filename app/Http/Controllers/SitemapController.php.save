@@ -1,0 +1,80 @@
+
+
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Category;
+use App\Models\Page;
+use App\Models\Post;
+use App\Models\Tag;
+use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
+
+
+class SitemapController extends Controller
+{
+    public function index()
+    {
+        return load_sitemap_template('index', $this->data);
+    }
+
+    public function posts($page = null)
+    {
+        $limit = 200;
+        if ($page) {
+            $this->data["posts"] = Post::isPublished()->with(["main_image", "category"])->orderBy('published_at', 'DESC')->skip(($page - 1) * $limit)->take($limit)->get();
+            return load_sitemap_template('posts', $this->data);
+        } else {
+            $total_posts = Post::select('id')->isPublished()->count();
+            $this->data['pages'] = ceil($total_posts / $limit);
+            return load_sitemap_template('posts_index', $this->data);
+        }
+    }
+
+    public function tags()
+    {
+        $this->data["tags"] = Tag::orderBy('id', 'DESC')->get();
+        return load_sitemap_template('tags', $this->data);
+    }
+
+    public function categories()
+    {
+        $this->data["categories"] = Category::orderBy('id', 'DESC')->get();
+        return load_sitemap_template('categories', $this->data);
+    }
+
+    public function authors()
+    {
+        $this->data["authors"] = User::where("id", ">", 1)->orderBy('id', 'DESC')->get();
+        return load_sitemap_template('authors', $this->data);
+    }
+
+    public function pages()
+    {
+        $this->data["pages"] = Page::orderBy('id', 'DESC')->get();
+        return load_sitemap_template('pages', $this->data);
+    }
+
+   public function news($page = 1, $limit = 10) // You may decide the default values
+   {
+    $skip = ($page - 1) * $limit;
+    if ($skip < 0) $skip = 0;
+
+    $news = Post::isPublished()
+            ->where('published_at', '>=', Carbon::now()->subDays(2)) // Get news from the last 2 days
+            ->with(["main_image", "category"])
+            ->orderBy('published_at', 'DESC')
+            ->skip($skip)
+            ->take($limit)
+            ->get();
+
+     return $news;   // not a test String
+   } 
+
+
+
+
+}
