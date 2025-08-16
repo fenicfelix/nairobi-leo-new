@@ -59,15 +59,14 @@ Route::get('/feeds', [RSSController::class, 'feeds'])->name('feeds');
 Route::get('/feed/{category}', [RSSController::class, 'feed'])->name('category_rss');
 
 
-//Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
-Route::get('/sitemap.xml', [SitemapController::class, 'posts'])->name('posts_sitemap.index');
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
+Route::get('/google-news-sitemap.xml', [SitemapController::class, 'googleNewsSitemap'])->name('google_news_sitemap.index');
 Route::get('/news-sitemap.xml', [SitemapController::class, 'posts'])->name('posts_sitemap.index');
 Route::get('/posts-sitemap-{page?}.xml', [SitemapController::class, 'posts'])->name('posts_sitemap');
 Route::get('/categories-sitemap.xml', [SitemapController::class, 'categories'])->name('categories_sitemap');
 Route::get('/tags-sitemap.xml', [SitemapController::class, 'tags'])->name('tags_sitemap');
 Route::get('/authors-sitemap.xml', [SitemapController::class, 'authors'])->name('authors_sitemap');
 Route::get('/pages-sitemap.xml', [SitemapController::class, 'pages'])->name('pages_sitemap');
-
 
 Route::get('search/', [HomeController::class, 'search'])->name('search');
 Route::get('topic/{topic}', [HomeController::class, 'tags'])->name('topics');
