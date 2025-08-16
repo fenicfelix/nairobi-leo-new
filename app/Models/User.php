@@ -21,8 +21,30 @@ class User extends Authenticatable
      */
 
     protected $fillable = [
-        "id", "identifier", "thumbnail", "first_name", "last_name", "display_name", "biography", "group_id", "phone_number", "email", "username", "password", "email_verified_at", "active",
-        "user_url", "facebook", "instagram", "linkedin", "twitter", "added_by", "updated_by", "remember_token", "created_at", "updated_at"
+        "id",
+        "identifier",
+        "thumbnail",
+        "first_name",
+        "last_name",
+        "display_name",
+        "biography",
+        "group_id",
+        "phone_number",
+        "email",
+        "username",
+        "password",
+        "email_verified_at",
+        "active",
+        "user_url",
+        "facebook",
+        "instagram",
+        "linkedin",
+        "twitter",
+        "added_by",
+        "updated_by",
+        "remember_token",
+        "created_at",
+        "updated_at"
     ];
 
     /**
@@ -68,6 +90,6 @@ class User extends Authenticatable
 
     public function getTotalPostsAttribute()
     {
-        return $this->hasMany('App\Models\PostAuthor', 'author_id')->where('author_id', $this->id)->count();
+        return $this->hasMany(PostAuthor::class, 'author_id')->where('author_id', $this->id)->count();
     }
 }
