@@ -26,8 +26,9 @@ class SitemapController extends Controller
     {
         $posts = Post::isPublished()
             ->with(["main_image", "category"])
-            ->where('published_at', '>=', now()->subDays(2))
             ->orderBy('published_at', 'DESC')
+            ->skip(0) // Start from the first post
+            ->take(200) // Limit to 1000 posts
             ->get();
         $this->data["posts"] = $posts;
         return load_sitemap_template('google_news_sitemap', $this->data);
@@ -35,7 +36,7 @@ class SitemapController extends Controller
 
     public function posts($page = null)
     {
-        $limit = 200;
+        $limit = 1000;
         if ($page) {
             $this->data["posts"] = Post::isPublished()->with(["main_image", "category"])->orderBy('published_at', 'DESC')->skip(($page - 1) * $limit)->take($limit)->get();
             return load_sitemap_template('posts', $this->data);

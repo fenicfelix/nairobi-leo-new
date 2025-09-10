@@ -61,7 +61,7 @@ Route::get('/feed/{category}', [RSSController::class, 'feed'])->name('category_r
 
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 Route::get('/google-news-sitemap.xml', [SitemapController::class, 'googleNewsSitemap'])->name('google_news_sitemap.index');
-Route::get('/news-sitemap.xml', [SitemapController::class, 'posts'])->name('posts_sitemap.index');
+Route::get('/posts-sitemap.xml', [SitemapController::class, 'posts'])->name('posts_sitemap.index');
 Route::get('/posts-sitemap-{page?}.xml', [SitemapController::class, 'posts'])->name('posts_sitemap');
 Route::get('/categories-sitemap.xml', [SitemapController::class, 'categories'])->name('categories_sitemap');
 Route::get('/tags-sitemap.xml', [SitemapController::class, 'tags'])->name('tags_sitemap');

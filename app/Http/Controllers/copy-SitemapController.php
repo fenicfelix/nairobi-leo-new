@@ -21,7 +21,7 @@ class SitemapController extends Controller
 
     public function posts($page = null)
     {
-        $limit = 200;
+        $limit = 1000;
         if ($page) {
             $this->data["posts"] = Post::isPublished()->with(["main_image", "category"])->orderBy('published_at', 'DESC')->skip(($page - 1) * $limit)->take($limit)->get();
             return load_sitemap_template('posts', $this->data);

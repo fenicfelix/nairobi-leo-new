@@ -464,7 +464,7 @@ class DatatablesController extends Controller
         $sql_filter = "";
         if (!empty($request->get('search')['value'])) {
             $search = str_replace('"', '\"', $request->get('search')['value']);
-            $sql_filter .= ' and (a.title like "%' . $search . '%" or a.body like "%' . $search . '%" or c.display_name like "%' . $search . '%" or d.name like "%' . $search . '%" or b.name like "%' . $search . '%")';
+            $sql_filter .= ' and (a.title like "%' . $search . '%" or c.display_name like "%' . $search . '%" or d.name like "%' . $search . '%" or b.name like "%' . $search . '%")';
         }
 
         $filtered_count = DB::select($sql_count . $sql_count_from . $sql_where . $sql_filter);
@@ -786,7 +786,7 @@ class DatatablesController extends Controller
         $sql_filter = "";
         if (!empty($request->get('search')['value'])) {
             $search = str_replace('"', '\"', $request->get('search')['value']);
-            $sql_filter .= ' and (a.title like "%' . $search . '%" or a.body like "%' . $search . '%")';
+            $sql_filter .= ' and (a.title like "%' . $search . '%")';
         }
 
 
